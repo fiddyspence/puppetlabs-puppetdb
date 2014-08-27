@@ -31,7 +31,7 @@ class puppetdb::master::config(
     puppetdb_conn_validator { 'puppetdb_conn':
       puppetdb_server => $manage_config ? { true => $puppetdb_server, default => undef },
       puppetdb_port   => $manage_config ? { true => $puppetdb_port, default => undef },
-      use_ssl         => $puppetdb_port ? { 8080 => false, default => true },
+      use_ssl         => $puppetdb::disable_ssl ? { true => false, default => true },
       timeout         => $puppetdb_startup_timeout,
       require         => Package[$terminus_package],
     }
